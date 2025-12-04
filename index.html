@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Farmacia Meliá en Campana. Turnos 24hs, atención personalizada.">
-    <title>Farmacia Meliá | Luciano Reyes 1611 | Salud y Bienestar</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
+    <meta name="description" content="Farmacia Meliá - Luciano Reyes 1611, Campana. Turnos 24hs, atención personalizada y envíos a domicilio.">
+    <title>Farmacia Meliá | Luciano Reyes 1611 | Campana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00897B;
@@ -24,527 +19,97 @@
             --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
             --radius: 12px;
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+
+        /* BANNER TURNO */
+        .smart-banner { background: var(--primary-dark); color: white; min-height: 48px; display: flex; justify-content: center; align-items: center; font-size: 0.9rem; font-weight: 500; position: sticky; top: 0; z-index: 2000; box-shadow: 0 2px 10px rgba(0,0,0,0.15); padding: 8px 0; }
+        .banner-content { display: flex; align-items: center; gap: 12px; opacity: 0; transform: translateY(5px); transition: all 0.5s ease-out; text-align: center; padding: 0 15px; }
+        .banner-content.visible { opacity: 1; transform: translateY(0); }
+        .status-dot { width: 10px; height: 10px; background: #25D366; border-radius: 50%; animation: pulse-green 2s infinite; box-shadow: 0 0 0 0 rgba(37,211,102,0.7); }
+        @keyframes pulse-green { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(37,211,102,0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 48px; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 72px; }
+        .logo { font-size: 1.3rem; font-weight: 800; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; }
+        nav ul { display: flex; gap: 25px; align-items: center; }
+        nav a { font-weight: 500; font-size: 0.95rem; }
+        nav a:hover { color: var(--primary); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 28px; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; transition: all 0.3s ease; }
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(0,137,123,0.3); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,137,123,0.4); }
+        .btn-wsp { background: var(--accent); color: white; }
+        .btn-wsp:hover { background: #1da851; transform: translateY(-2px); }
+        .btn-review { background: #4285f4; color: white; margin-top: 15px; animation: float 3s ease-in-out infinite; }
+        .btn-review:hover { background: #3367d6; transform: translateY(-3px) scale(1.05); }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 15px; }
+        .status-open { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .status-closed { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .status-indicator { width: 8px; height: 8px; border-radius: 50%; }
+        .status-open .status-indicator { background: #22c55e; box-shadow: 0 0 0 2px #bbf7d0; }
+        .status-closed .status-indicator { background: #ef4444; box-shadow: 0 0 0 2px #fecaca; }
+
+        .hero { position: relative; padding: 100px 0; min-height: 80vh; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); display: flex; align-items: center; overflow: hidden; }
+        .hero-content { z-index: 2; max-width: 550px; }
+        .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .hero p { font-size: 1.15rem; color: var(--text-light); margin-bottom: 30px; }
+        .hero-img { position: absolute; right: -50px; top: 50%; transform: translateY(-50%); width: 50%; height: 75%; object-fit: cover; border-radius: 20px; box-shadow: -20px 20px 60px rgba(0,0,0,0.1); z-index: 1; }
+
+        .services-grid, .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card-style { background: white; padding: 35px 30px; border-radius: var(--radius); transition: 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .service-card { text-align: center; border: 1px solid #f1f1f1; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: transparent; }
+        .testimonial-card { box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-left: 4px solid var(--primary); }
+        .icon-box { width: 60px; height: 60px; background: #e0f2f1; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.5rem; }
+        .stars { color: #FFC107; margin-bottom: 15px; font-size: 1.3rem; }
+        .quote { font-style: italic; color: #475569; margin-bottom: 15px; display: block; font-size: 1rem; }
+        .client-name { font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
+
+        .location-wrapper { position: relative; height: 500px; background: #e2e8f0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .map-iframe { width: 100%; height: 100%; border: 0; filter: grayscale(100%); transition: 0.5s; }
+        .location-wrapper:hover .map-iframe { filter: grayscale(0%); }
+        .location-card { position: absolute; top: 50%; left: 50px; transform: translateY(-50%); background: rgba(255,255,255,0.98); padding: 35px; border-radius: 16px; max-width: 380px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); border-top: 5px solid var(--primary); }
+
+        .form-section { background: linear-gradient(to bottom, var(--bg-light) 50%, var(--primary-dark) 50%); padding-bottom: 60px; }
+        .form-wrapper { background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); display: flex; overflow: hidden; }
+        .form-info { flex: 1; padding: 50px; background: var(--primary); color: white; display: flex; flex-direction: column; justify-content: center; }
+        .form-content { flex: 1.5; padding: 50px; }
+        .input-group { margin-bottom: 20px; }
+        .input-field { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: 0.3s; font-family: inherit; }
+        .input-field:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(0,137,123,0.1); }
+
+        footer { background: #1e293b; color: #94a3b8; padding: 50px 0; text-align: center; font-size: 0.9rem; }
+        .wsp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 100; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform 0.3s; }
+        .wsp-float:hover { transform: scale(1.1); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; }
+        .modal-box { background: white; padding: 40px; border-radius: 16px; text-align: center; max-width: 420px; width: 90%; animation: modalPop 0.4s ease-out; }
+        @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- BANNER INTELIGENTE --- */
-        .smart-banner {
-            background-color: var(--primary-dark);
-            color: white;
-            min-height: 48px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.9rem;
-            font-weight: 500;
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-            padding: 8px 0;
-        }
-
-        .banner-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            opacity: 0;
-            transform: translateY(5px);
-            transition: all 0.5s ease-out;
-            text-align: center;
-            padding: 0 15px;
-        }
-
-        .banner-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background: #25D366;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            animation: pulse-green 2s infinite;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-
-        @keyframes pulse-green {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 6px rgba(37, 211, 102, 0);
-            }
-
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-
-        /* --- HEADER --- */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 48px;
-            z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 72px;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        nav a {
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        /* --- UI COMPONENTS --- */
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        .text-primary {
-            color: var(--primary);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 137, 123, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 137, 123, 0.4);
-        }
-
-        .btn-wsp {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-wsp:hover {
-            background: #1da851;
-            transform: translateY(-2px);
-        }
-
-        /* --- STATUS BADGE --- */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .status-open {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
-
-        .status-closed {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .status-open .status-indicator {
-            background: #22c55e;
-            box-shadow: 0 0 0 2px #bbf7d0;
-        }
-
-        .status-closed .status-indicator {
-            background: #ef4444;
-            box-shadow: 0 0 0 2px #fecaca;
-        }
-
-        /* --- HERO --- */
-        .hero {
-            position: relative;
-            padding: 100px 0;
-            min-height: 80vh;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            z-index: 2;
-            max-width: 550px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--text-light);
-            margin-bottom: 30px;
-        }
-
-        .hero-img {
-            position: absolute;
-            right: -50px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50%;
-            height: 75%;
-            border-radius: 20px;
-            object-fit: cover;
-            box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-        }
-
-        /* --- SECTIONS GRID --- */
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .services-grid,
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .card-style {
-            background: white;
-            padding: 35px 30px;
-            border-radius: var(--radius);
-            transition: 0.3s;
-        }
-
-        .service-card {
-            text-align: center;
-            border: 1px solid #f1f1f1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-            border-color: transparent;
-        }
-
-        .testimonial-card {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--primary);
-        }
-
-        .stars {
-            color: #FFC107;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .quote {
-            font-style: italic;
-            color: #475569;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .client-name {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--text-main);
-        }
-
-        .icon-box {
-            width: 60px;
-            height: 60px;
-            background: #e0f2f1;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-        }
-
-        /* --- UBICACIÓN --- */
-        .location-wrapper {
-            position: relative;
-            height: 500px;
-            background: #e2e8f0;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .map-iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            filter: grayscale(100%);
-            transition: 0.5s;
-        }
-
-        .location-wrapper:hover .map-iframe {
-            filter: grayscale(0%);
-        }
-
-        .location-card {
-            position: absolute;
-            top: 50%;
-            left: 50px;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.98);
-            padding: 35px;
-            border-radius: 16px;
-            max-width: 380px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            border-top: 5px solid var(--primary);
-        }
-
-        /* --- FORMULARIO --- */
-        .form-section {
-            background: linear-gradient(to bottom, var(--bg-light) 50%, var(--primary-dark) 50%);
-            padding-bottom: 60px;
-        }
-
-        .form-wrapper {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            display: flex;
-            overflow: hidden;
-        }
-
-        .form-info {
-            flex: 1;
-            padding: 50px;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .form-content {
-            flex: 1.5;
-            padding: 50px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: 0.3s;
-            font-family: inherit;
-        }
-
-        .input-field:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-
-        /* --- EXTRAS --- */
-        footer {
-            background: #1e293b;
-            color: #94a3b8;
-            padding: 50px 0;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .wsp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            transition: transform 0.3s;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-        }
-
-        .wsp-float:hover {
-            transform: scale(1.1);
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .modal-box {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        /* Responsive */
         @media (max-width: 900px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 50px;
-            }
-
-            .hero-img {
-                position: relative;
-                width: 90%;
-                height: 300px;
-                right: 0;
-                transform: none;
-                margin-top: 40px;
-            }
-
-            .form-wrapper {
-                flex-direction: column;
-            }
-
-            .location-card {
-                position: relative;
-                top: 0;
-                left: 0;
-                transform: none;
-                width: 100%;
-                max-width: none;
-                margin: 20px;
-            }
-
-            nav {
-                display: none;
-            }
-
-            .smart-banner {
-                font-size: 0.85rem;
-                flex-direction: column;
-                padding: 10px;
-            }
+            .hero { flex-direction: column; text-align: center; padding-top: 50px; }
+            .hero-img { position: relative; width: 90%; height: 300px; right: 0; transform: none; margin-top: 40px; }
+            .form-wrapper { flex-direction: column; }
+            .location-card { position: relative; top: 0; left: 0; transform: none; width: 100%; max-width: none; margin: 20px; }
+            nav { display: none; }
+            .smart-banner { font-size: 0.85rem; flex-direction: column; padding: 10px; }
         }
     </style>
 </head>
-
 <body>
 
+    <!-- BANNER DE TURNO -->
     <div class="smart-banner">
         <div id="banner-content" class="banner-content">
             <div class="status-dot"></div>
@@ -555,42 +120,39 @@
     <header>
         <div class="container nav-container">
             <div class="logo">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--primary)">
-                    <path
-                        d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM10 17H8V13H4V11H8V7H10V11H14V7H16V11H20V13H16V17H14V13H10V17Z" />
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM10 17H8V13H4V11H8V7H10V11H14V7H16V11H20V13H16V17H14V13H10V17Z"/>
                 </svg>
-                Farmacia Meliá 
+                Farmacia Meliá
             </div>
             <nav>
                 <ul>
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#opiniones">Opiniones</a></li>
                     <li><a href="#ubicacion">Ubicación</a></li>
-                    <li><a href="#contacto" class="btn btn-primary btn-nav">Hacer Pedido</a></li>
+                    <li><a href="#contacto" class="btn btn-primary">Hacer Pedido</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="hero">
-        <div class="container" style="position: relative; width: 100%; height: 100%;">
+        <div class="container" style="position:relative;width:100%;height:100%">
             <div class="hero-content">
-                <div id="status-badge-container">
-                    <!-- Badge will be injected here -->
-                </div>
-                <h1>Tu salud, cerca de casa y <span class="text-primary">al mejor precio.</span></h1>
+                <div id="status-badge-container"></div>
+                <h1>Tu salud, cerca de casa y <span style="color:var(--primary)">al mejor precio.</span></h1>
                 <p>Envíos rápidos, atención profesional y todas las obras sociales. Hacé tu pedido online.</p>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
                     <a href="#contacto" class="btn btn-primary">Hacer Pedido</a>
-                    <a href="https://wa.me/https://api.whatsapp.com/send?phone=+543489528745&text=Hola%20aqui%20dejo%20mi%20consulta!!!" target="_blank" class="btn btn-wsp">Consultar por WhatsApp</a>
+                    <a href="https://wa.me/543489528745" target="_blank" class="btn btn-wsp">Consultar por WhatsApp</a>
                 </div>
             </div>
-            <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80"
-                alt="Farmacia Campana" class="hero-img">
+            <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80" alt="Farmacia Meliá" class="hero-img">
         </div>
     </main>
 
-    <section id="servicios" class="section-padding bg-white">
+    <!-- SERVICIOS -->
+    <section id="servicios" class="section-padding" style="background:white">
         <div class="container">
             <div class="section-title">
                 <h2>Nuestros Servicios</h2>
@@ -598,33 +160,25 @@
             </div>
             <div class="services-grid">
                 <div class="card-style service-card">
-                    <div class="icon-box"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM10 17H8V13H4V11H8V7H10V11H14V7H16V11H20V13H16V17H14V13H10V17Z" />
-                        </svg></div>
+                    <div class="icon-box">OS</div>
                     <h3>Obras Sociales</h3>
-                    <p>Atendemos PAMI, IOMA, OSDE y las principales prepagas.</p>
+                    <p>Atendemos PAMI, IOMA, OSDE, Swiss Medical y todas las principales prepagas con descuentos directos.</p>
                 </div>
                 <div class="card-style service-card">
-                    <div class="icon-box"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
-                        </svg></div>
-                    <h3>Asesoramiento</h3>
-                    <p>consultas farmacéuticas.</p>
+                    <div class="icon-box">Consejo</div>
+                    <h3>Asesoramiento Profesional</h3>
+                    <p>Consultas farmacéuticas personalizadas, control de presión, glucemia y más.</p>
                 </div>
                 <div class="card-style service-card">
-                    <div class="icon-box"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H9v-2h6v2zm0-5H9V9h6v4z" />
-                        </svg></div>
+                    <div class="icon-box">Belleza</div>
                     <h3>Dermocosmética</h3>
-                    <p>Las mejores marcas: Vichy, La Roche-Posay y Eucerin.</p>
+                    <p>Las mejores marcas: Vichy, La Roche-Posay, Eucerin, Avène y Bioderma.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- OPINIONES -->
     <section id="opiniones" class="section-padding">
         <div class="container">
             <div class="section-title">
@@ -634,53 +188,40 @@
             <div class="testimonial-grid">
                 <div class="card-style testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <span class="quote">"Excelente atención, envié la receta por WhatsApp y cuando llegué ya tenían todo
-                        preparado. Súper ágil."</span>
-                    <span class="client-name">- Mariana Gutierrez</span>
+                    <span class="quote">"Excelente atención, envié la receta por WhatsApp y cuando llegué ya tenían todo preparado. Súper ágil."</span>
+                    <span class="client-name">- Mariana Gutiérrez</span>
                 </div>
                 <div class="card-style testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <span class="quote">"Siempre consigo los medicamentos de PAMI que en otras farmacias faltan. El
-                        personal es muy amable."</span>
-                    <span class="client-name">- Roberto Fernandez</span>
+                    <span class="quote">"Siempre consigo los medicamentos de PAMI que en otras farmacias faltan. El personal es muy amable y paciente."</span>
+                    <span class="client-name">- Roberto Fernández</span>
                 </div>
                 <div class="card-style testimonial-card">
-                    <div class="stars">★★★★☆</div>
-                    <span class="quote">"Muy buena ubicación en Campana y precios competitivos en perfumería.
-                        Recomendable."</span>
-                    <span class="client-name">- Sofia Lerena</span>
+                    <div class="stars">★★★★★</div>
+                    <span class="quote">"Muy buena ubicación en Campana y precios competitivos en perfumería. Siempre me atienden con una sonrisa."</span>
+                    <span class="client-name">- Sofía Lerena</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ubicacion" class="section-padding bg-white">
+    <!-- UBICACIÓN -->
+    <section id="ubicacion" class="section-padding" style="background:white">
         <div class="container">
-            <div class="section-title">
-                <h2>Visítanos</h2>
-            </div>
+            <div class="section-title"><h2>Visítanos</h2></div>
             <div class="location-wrapper">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3295.123456789!2d-58.96185!3d-34.16875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc9f6b6e6e6e5%3A0x4b8f8e8d8e8f8e8e!2sE%20Casaux%201748%2C%20Campana%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar"
-                    class="map-iframe" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.887059337295!2d-59.00015668476862!3d-34.16875098058083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc9c8f8f8f8f8f%3A0x9f8e8d8e8f8e8d8e!2sLuciano%20Reyes%201611%2C%20Campana%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <div class="location-card">
-                    <h3 class="text-primary" style="margin-bottom:15px;">Farmacia Meliá </h3>
-                    <p style="margin-bottom: 8px; font-weight:600; line-height:1.4;">
-                        📍 Luciano Reyes 1611| Ariel Del Plata<br>
-                        <span style="font-weight:400; color:#64748b;">Campana, Buenos Aires</span>
+                    <h3 style="color:var(--primary);margin-bottom:15px">Farmacia Meliá</h3>
+                    <p style="margin-bottom:8px;font-weight:600;line-height:1.4">
+                        Luciano Reyes 1611<br>
+                        <span style="font-weight:400;color:#64748b">Campana, Buenos Aires</span>
                     </p>
-                    <p style="margin-bottom: 20px; font-size:0.9rem; color:#64748b;">Lunes a viernes: 8:30 a 12:30 hs y de 15:30 a 20:30 hs , sabado: 8:30 a 12:30 hs </p>
-
-                    <a href="https://maps.app.goo.gl/cf6eJBMwt7sHQVDJ6" target="_blank" class="btn btn-primary"
-                        style="width: 100%; justify-content: center;">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            stroke-width="2">
-                            <path
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
+                    <p style="margin-bottom:20px;font-size:0.9rem;color:#64748b">
+                        Lunes a viernes: 8:30 a 12:30 hs y de 16:00 a 20:00 hs<br>
+                        Sábado: 8:30 a 12:30 hs
+                    </p>
+                    <a href="https://maps.app.goo.gl/4rYJJ1FYwCzgbTb56" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">
                         Cómo llegar ahora
                     </a>
                 </div>
@@ -688,43 +229,36 @@
         </div>
     </section>
 
+    <!-- FORMULARIO -->
     <section id="contacto" class="section-padding form-section">
         <div class="container">
-            <div class="section-title" style="color:white;">
-                <h2 style="color:white;">Hacé tu Pedido Online</h2>
-                <p style="color:rgba(255,255,255,0.8);">Adelantá tu pedido y ahorrá tiempo.</p>
+            <div class="section-title" style="color:white">
+                <h2 style="color:white">Hacé tu Pedido Online</h2>
+                <p style="color:rgba(255,255,255,0.8)">Adelantá tu pedido y ahorrá tiempo.</p>
             </div>
             <div class="form-wrapper">
                 <div class="form-info">
                     <h3>¿Cómo funciona?</h3>
-                    <ul style="margin-top:20px; display:flex; flex-direction:column; gap:15px; list-style:none;">
-                        <li>📝 <strong>1.</strong> Completá tus datos y tu pedido.</li>
-                        <li>🚀 <strong>2.</strong> Enviá por WhatsApp y te respondemos al instante.</li>
+                    <ul style="margin-top:20px;display:flex;flex-direction:column;gap:15px;list-style:none">
+                        <li>Completá tus datos y tu pedido.</li>
+                        <li>Enviá por WhatsApp y te respondemos al instante.</li>
                     </ul>
                 </div>
                 <div class="form-content">
                     <form id="pedidoForm">
                         <div class="input-group">
-                            <label style="display:block; margin-bottom:5px; font-weight:500;">Tu Nombre</label>
-                            <input type="text" id="nombre" class="input-field" placeholder="Ej: Juan Pérez" required
-                                minlength="3">
+                            <label style="display:block;margin-bottom:5px;font-weight:500">Tu Nombre</label>
+                            <input type="text" id="nombre" class="input-field" placeholder="Ej: Juan Pérez" required minlength="3">
                         </div>
-
                         <div class="input-group">
-                            <label style="display:block; margin-bottom:5px; font-weight:500;">Tu Celular
-                                (WhatsApp)</label>
-                            <input type="tel" id="celular" class="input-field"
-                                placeholder="3489 15xxxxxx (solo números)" required pattern="[0-9]{10,15}">
+                            <label style="display:block;margin-bottom:5px;font-weight:500">Tu Celular (WhatsApp)</label>
+                            <input type="tel" id="celular" class="input-field" placeholder="3489 15xxxxxx (solo números)" required pattern="[0-9]{10,15}">
                         </div>
-
                         <div class="input-group">
-                            <label style="display:block; margin-bottom:5px; font-weight:500;">¿Qué necesitas?</label>
-                            <textarea id="mensaje" class="input-field" rows="5"
-                                placeholder="Ej: Ibuprofeno 400mg x20, precio de tests de embarazo, turno vacuna antigripal, etc..."></textarea>
+                            <label style="display:block;margin-bottom:5px;font-weight:500">¿Qué necesitas?</label>
+                            <textarea id="mensaje" class="input-field" rows="5" placeholder="Ej: Ibuprofeno 400mg x20, precio de tests de embarazo, etc..."></textarea>
                         </div>
-
-                        <button type="submit" class="btn btn-wsp" style="width:100%; margin-top:10px;">Enviar por
-                            WhatsApp 💬</button>
+                        <button type="submit" class="btn btn-wsp" style="width:100%;margin-top:10px">Enviar por WhatsApp</button>
                     </form>
                 </div>
             </div>
@@ -737,27 +271,31 @@
         </div>
     </footer>
 
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a href="https://wa.me/543489528745" class="wsp-float" target="_blank" title="Chat WhatsApp">
         <svg width="30" height="30" fill="white" viewBox="0 0 24 24">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.263c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.263c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
         </svg>
     </a>
 
+    <!-- MODAL POST ENVÍO -->
     <div id="finalModal" class="modal-overlay">
         <div class="modal-box">
-            <h3 class="text-primary">¡Todo listo!</h3>
-            <p id="modalMsg" style="margin: 15px 0; color: #64748b;"></p>
-            <a id="waLink" href="#" target="_blank" class="btn btn-wsp" style="width:100%">Abrir WhatsApp Ahora 💬</a>
-            <button onclick="document.getElementById('finalModal').style.display='none'"
-                style="margin-top:15px; border:none; background:none; cursor:pointer; text-decoration:underline; color:#94a3b8;">Cerrar</button>
+            <h3 style="color:var(--primary)">¡Todo listo!</h3>
+            <p id="modalMsg" style="margin:15px 0;color:#64748b;line-height:1.5"></p>
+            <a id="waLink" href="#" target="_blank" class="btn btn-wsp" style="width:100%">Abrir WhatsApp Ahora</a>
+            <a href="https://maps.app.goo.gl/4rYJJ1FYwCzgbTb56" target="_blank" class="btn btn-review" style="width:100%">
+                Dejar mi reseña en Google
+            </a>
+            <button onclick="document.getElementById('finalModal').style.display='none'" style="margin-top:20px;background:none;border:none;cursor:pointer;text-decoration:underline;color:#94a3b8">
+                Cerrar
+            </button>
         </div>
     </div>
 
     <script>
         const CONFIG = {
             PROXY: 'https://api.allorigins.win/get?url=',
-            // Usamos las dos fuentes principales, priorizando la que funcione
             URL_TURNO_1: 'https://m.campananoticias.com/farmacias',
             URL_TURNO_2: 'https://www.encampana.com/cat.php?categoria=Farmacias-de-Turno'
         };
@@ -768,157 +306,95 @@
             logicFormWhatsApp();
         });
 
-        // --- LÓGICA DE HORARIOS ---
         function updateOpeningStatus() {
             const now = new Date();
-            const day = now.getDay(); // 0 = Domingo, 1 = Lunes, ...
+            const day = now.getDay();
             const hours = now.getHours();
             const minutes = now.getMinutes();
-            const currentTime = hours * 60 + minutes;
+            const current = hours * 60 + minutes;
 
-            // Horarios en minutos
-            const morningOpen = 8 * 60 + 30; // 8:30
-            const morningClose = 12 * 60 + 30; // 12:30
-            const afternoonOpen = 16 * 60; // 16:00
-            const afternoonClose = 20 * 60; // 20:00
-            const saturdayClose = 12 * 60 + 30; // 12:30
+            const morningOpen = 8*60 + 30;
+            const morningClose = 12*60 + 30;
+            const afternoonOpen = 16*60;
+            const afternoonClose = 20*60;
+            const saturdayClose = 12*60 + 30;
 
             let isOpen = false;
-
-            if (day === 0) {
-                // Domingo cerrado
-                isOpen = false;
+            if (day >= 1 && day <= 5) {
+                if ((current >= morningOpen && current < morningClose) || (current >= afternoonOpen && current < afternoonClose)) isOpen = true;
             } else if (day === 6) {
-                // Sábado: 8:30 - 12:30
-                if (currentTime >= morningOpen && currentTime < saturdayClose) {
-                    isOpen = true;
-                }
-            } else {
-                // Lunes a Viernes: 8:30-12:30 y 16:00-20:00
-                if ((currentTime >= morningOpen && currentTime < morningClose) ||
-                    (currentTime >= afternoonOpen && currentTime < afternoonClose)) {
-                    isOpen = true;
-                }
+                if (current >= morningOpen && current < saturdayClose) isOpen = true;
             }
 
-            // Actualizar UI
-            const badgeContainer = document.getElementById('status-badge-container');
-            if (isOpen) {
-                badgeContainer.innerHTML = `
-                    <div class="status-badge status-open">
-                        <div class="status-indicator"></div>
-                        ABIERTO AHORA
-                    </div>`;
-            } else {
-                badgeContainer.innerHTML = `
-                    <div class="status-badge status-closed">
-                        <div class="status-indicator"></div>
-                        CERRADO AHORA
-                    </div>`;
-            }
-
+            document.getElementById('status-badge-container').innerHTML = isOpen
+                ? `<div class="status-badge status-open"><div class="status-indicator"></div>ABIERTO AHORA</div>`
+                : `<div class="status-badge status-closed"><div class="status-indicator"></div>CERRADO AHORA</div>`;
             return isOpen;
         }
 
-        // SCRAPING ULTRA ROBUSTO - CORREGIDO
         async function logicScrapingBanner() {
             const bannerText = document.getElementById('banner-text');
             const bannerContent = document.getElementById('banner-content');
-            const isOpen = updateOpeningStatus(); // Re-check status for banner text
-
+            const isOpen = updateOpeningStatus();
             let allText = '';
 
-            // Intentamos primero campananoticias (más simple y siempre actualizada)
             try {
                 let res = await fetch(CONFIG.PROXY + encodeURIComponent(CONFIG.URL_TURNO_1));
-                if (res.ok) {
-                    const data = await res.json();
-                    allText = data.contents;
-                }
-            } catch (e) { }
-
-            // Si no, encampana
+                if (res.ok) { const data = await res.json(); allText = data.contents; }
+            } catch(e) {}
             if (!allText) {
                 try {
                     let res = await fetch(CONFIG.PROXY + encodeURIComponent(CONFIG.URL_TURNO_2));
-                    if (res.ok) {
-                        const data = await res.json();
-                        allText = data.contents;
-                    }
-                } catch (e) { }
+                    if (res.ok) { const data = await res.json(); allText = data.contents; }
+                } catch(e) {}
             }
 
-            if (!allText) {
-                fallbackBanner(isOpen);
-                return;
-            }
+            if (!allText) { fallbackBanner(isOpen); return; }
 
             const parser = new DOMParser();
             const doc = parser.parseFromString(allText, 'text/html');
             const bodyText = doc.body.innerText.toLowerCase();
-            let foundPharmacies = [];
+            let found = [];
 
-            // 1. Intentamos con selectores comunes
             const boxes = doc.querySelectorAll('.box, .item, .farmacia, article, .entry');
             if (boxes.length > 0) {
                 boxes.forEach(box => {
-                    const text = box.textContent.trim();
-                    const lines = text.split('\n').map(l => l.trim()).filter(l => l);
-                    let name = '';
-                    let address = '';
-                    if (lines[0]) name = lines[0].toUpperCase();
-                    if (lines[1]) address = lines[1];
-                    if (name.length > 2) {
-                        const is24hs = bodyText.includes('24') && text.toLowerCase().includes('24');
-                        foundPharmacies.push({ name, address, is24hs });
+                    const lines = box.innerText.trim().split('\n').map(l => l.trim()).filter(l => l);
+                    if (lines.length >= 1) {
+                        let name = lines[0].toUpperCase().replace(/farmacia|turno|de|24\s*hs/gi, '').trim();
+                        let address = lines[1] || '';
+                        const is24hs = bodyText.includes('24') && box.innerText.toLowerCase().includes('24');
+                        if (name && name.length < 60) found.push({name, address, is24hs});
                     }
                 });
             }
 
-            // 2. Si no, parsing por texto plano (MEJORADO)
-            if (foundPharmacies.length === 0) {
+            if (found.length === 0) {
                 const lines = bodyText.split('\n').map(l => l.trim()).filter(l => l.length > 3);
-
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i];
-
-                    // Regex mejorado para detectar nombres de farmacias
-                    // Busca líneas que parezcan nombres (mayúsculas, caracteres típicos) y tengan separadores como '·', ',', ':'
-                    if (/^[a-záéíóúñ0-9\s\.\-\&\'·,:\(\)]+$/.test(line) && /[·,:\)]/.test(line) && line.match(/[A-ZÁÉÍÓÚÑ]/g)?.length > 3) {
-                        let name = line.split(/·|,|:/)[0].trim();
-                        // Limpieza más agresiva
-                        name = name.replace(/farmacia |turno |de |24 ?hs.*/gi, '').trim();
-
-                        // Detección de 24hs mejorada
-                        const is24hs = line.includes('24') || (lines[i + 1] || '').includes('24');
-
-                        let address = line.includes('·') ? line.split('·').slice(1).join(' · ') : (lines[i + 1] || '');
-                        address = address.replace(/tel[\.\s]?\d+.*/gi, '').trim();
-
-                        if (name && name.length < 50) { // Sanity check de longitud
-                            foundPharmacies.push({ name: name.toUpperCase(), address, is24hs });
-                        }
+                for (let line of lines) {
+                    if (/[·,:\)]/.test(line) && /[A-ZÁÉÍÓÚÑ]/.test(line)) {
+                        let name = line.split(/·|,|:/)[0].trim().replace(/farmacia|turno|de|24\s*hs/gi, '').trim();
+                        const is24hs = line.includes('24') || (lines[lines.indexOf(line)+1]||'').includes('24');
+                        let address = line.split('·').slice(1).join(' · ');
+                        if (name && name.length < 50) found.push({name: name.toUpperCase(), address, is24hs});
                     }
                 }
             }
 
-            // Eliminar duplicados
-            foundPharmacies = foundPharmacies.filter((v, i, a) => a.findIndex(t => t.name === v.name) === i);
+            found = found.filter((v,i,a) => a.findIndex(t => t.name === v.name) === i);
 
-            // Mostrar resultado
             setTimeout(() => {
-                if (foundPharmacies.length > 0) {
-                    const active24 = foundPharmacies.filter(f => f.is24hs);
-                    const toShow = active24.length > 0 ? active24 : foundPharmacies;
-
-                    if (toShow.length === 1) {
-                        const f = toShow[0];
+                if (found.length > 0) {
+                    const active24 = found.filter(f => f.is24hs);
+                    const list = active24.length > 0 ? active24 : found;
+                    if (list.length === 1) {
+                        const f = list[0];
                         const label = f.is24hs ? 'ABIERTA 24HS' : 'DE TURNO HOY';
-                        bannerText.innerHTML = `🟢 ${label}: <strong>${f.name}</strong> · ${f.address}`;
+                        bannerText.innerHTML = `${label}: <strong>${f.name}</strong> · ${f.address}`;
                     } else {
-                        const label = toShow[0].is24hs ? 'ABIERTAS 24HS' : 'DE TURNO HOY';
-                        const list = toShow.map(f => `<strong>${f.name}</strong> (${f.address})`).join(' · ');
-                        bannerText.innerHTML = `🟢 ${label}: ${list}`;
+                        const label = list[0].is24hs ? 'ABIERTAS 24HS' : 'DE TURNO HOY';
+                        const names = list.map(f => `<strong>${f.name}</strong>`).join(' · ');
+                        bannerText.innerHTML = `${label}: ${names}`;
                     }
                 } else {
                     fallbackBanner(isOpen);
@@ -930,47 +406,32 @@
         function fallbackBanner(isOpen) {
             const bannerText = document.getElementById('banner-text');
             const bannerContent = document.getElementById('banner-content');
-            const msg = isOpen ? 'Estamos ABIERTOS hasta 12:30/20:00 hs' : 'Estamos CERRADOS ahora';
-            bannerText.innerHTML = `🟢 ${msg} · Consultá turnos por WhatsApp`;
+            const msg = isOpen ? 'Estamos ABIERTOS hasta las 20:00 hs' : 'Estamos CERRADOS · Consultá turnos por WhatsApp';
+            bannerText.innerHTML = `${msg}`;
             bannerContent.classList.add('visible');
         }
 
-        // FORMULARIO PERFECTO CON EMOJIS
         function logicFormWhatsApp() {
             const form = document.getElementById('pedidoForm');
-
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', e => {
                 e.preventDefault();
-
                 const nombre = document.getElementById('nombre').value.trim();
                 const celular = document.getElementById('celular').value.trim();
                 const mensaje = document.getElementById('mensaje').value.trim() || 'Consulta general';
 
-                const text = `¡Hola equipo de Farmacia Meliá! ❤️
-
-🧑‍💼 Nombre: *${nombre || 'Cliente'}*
-
-📱 WhatsApp: *${celular}*
-
-📝 Pedido / Consulta:
-${mensaje}
-
-¡Muchas gracias, espero su respuesta! 😊`;
-
-                const encodedText = encodeURIComponent(text);
-                const waUrl = `https://wa.me/543489528745?text=${encodedText}`;
+                const text = `¡Hola equipo de Farmacia Meliá!\n\nNombre: *${nombre}*\nWhatsApp: *${celular}*\n\n${mensaje}\n\n¡Gracias!`;
+                const waUrl = `https://wa.me/543489528745?text=${encodeURIComponent(text)}`;
 
                 document.getElementById('waLink').href = waUrl;
-                document.getElementById('modalMsg').textContent = `¡Perfecto ${nombre.split(' ')[0] || 'amigo'}! Abre WhatsApp y enviá tu pedido 🚀`;
-
+                document.getElementById('modalMsg').innerHTML = `¡Perfecto <strong>${nombre.split(' ')[0]}!</strong><br><br>Tu pedido está listo para enviar.<br><br><em>Si te atendimos bien, tu reseña nos ayuda a crecer</em>`;
                 document.getElementById('finalModal').style.display = 'flex';
             });
         }
     </script>
 </body>
-
 </html>
 "commit"
+
 
 
 
